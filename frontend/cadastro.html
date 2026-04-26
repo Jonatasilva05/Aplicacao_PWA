@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Denúncia</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="manifest" href="./manifest.json">
+</head>
+<body>
+    <div class="card-auth">
+        <h2>Criar Identidade Falsa</h2>
+        <input type="text" id="nome" placeholder="Nome Falso">
+        <input type="password" id="senha" placeholder="Senha">
+        <button onclick="cadastrar()">Cadastrar</button>
+        <a href="login.html">Já tem conta? Faça Login</a>
+    </div>
+
+    <script>
+        async function cadastrar() {
+            const nome_falso = document.getElementById('nome').value;
+            const senha = document.getElementById('senha').value;
+
+            try {
+                const req = await fetch('http://localhost:3000/cadastro', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome_falso, senha })
+                });
+                const res = await req.json();
+                if(res.erro) alert(res.erro);
+                else {
+                    alert('Cadastrado! Faça login agora.');
+                    window.location.href = 'login.html';
+                }
+            } catch(e) { alert("Erro de conexão."); }
+        }
+    </script>
+</body>
+</html>

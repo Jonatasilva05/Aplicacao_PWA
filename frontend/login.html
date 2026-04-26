@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Denúncia</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="manifest" href="./manifest.json">
+</head>
+<body>
+    <div class="card-auth">
+        <h2>Entrar no Chat</h2>
+        <input type="text" id="nome" placeholder="Nome Falso">
+        <input type="password" id="senha" placeholder="Senha">
+        <button onclick="logar()">Entrar</button>
+        <a href="cadastro.html">Não tem conta? Cadastre-se</a>
+    </div>
+
+    <script>
+        async function logar() {
+            const nome_falso = document.getElementById('nome').value;
+            const senha = document.getElementById('senha').value;
+
+            try {
+                const req = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome_falso, senha })
+                });
+                const res = await req.json();
+                if(res.erro) alert(res.erro);
+                else {
+                    // Salva quem está logado e vai pro Dashboard
+                    localStorage.setItem('usuario_denuncia', nome_falso);
+                    window.location.href = 'index.html';
+                }
+            } catch(e) { alert("Erro de conexão."); }
+        }
+    </script>
+</body>
+</html>

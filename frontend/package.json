@@ -1,0 +1,20 @@
+{
+  "name": "aplicacao_pwa",
+  "version": "1.0.0",
+  "description": "Criei uma Aplicação em PWA para testes e aprendizado",
+  "main": "sw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jonatasilva05/Aplicacao_PWA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jonatasilva05/Aplicacao_PWA/issues"
+  },
+  "homepage": "https://github.com/Jonatasilva05/Aplicacao_PWA#readme"
+}
