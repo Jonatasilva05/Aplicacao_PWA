@@ -1,4 +1,31 @@
-<script src="http://localhost:3000/socket.io/socket.io.js"></script>
-<script src="./assets/js/offline-db.js"></script>
-<script src="./assets/js/api.js"></script>
-<script src="./assets/js/chat.js"></script>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat de Denúncias</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="manifest" href="./manifest.json">
+</head>
+<body>
+    <div id="chat-app" style="display: flex;">
+        <div class="chat-header">
+            <h3>🛡️ Chat Seguro (<span id="nome-usuario"></span>)</h3>
+            <button onclick="sair()">Sair</button>
+        </div>
+        <div id="status-offline">Você está offline. Denúncias na fila.</div>
+        
+        <div id="mensagens-container"></div>
+        
+        <div class="chat-input-area">
+            <input type="text" id="input-msg" placeholder="Digite sua denúncia...">
+            <button onclick="enviarMensagem()">Enviar</button>
+        </div>
+    </div>
+
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="./assets/js/offline-db.js"></script>
+    <script src="./assets/js/api.js"></script>
+    <script src="./assets/js/chat.js"></script>
+</body>
+</html>
