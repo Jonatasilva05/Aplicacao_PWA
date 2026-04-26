@@ -1,0 +1,46 @@
+{
+  "usuarios": [
+    {
+      "id": 1777176769239,
+      "nome_falso": "teste",
+      "senha": "$2b$08$nOIcN02Fg8nHn/r7weZIquK.OzADSrZPydtl/PHJ.4OcAYNyzyowu"
+    },
+    {
+      "id": 1777176801741,
+      "nome_falso": "ir",
+      "senha": "$2b$08$wPEHcOimi7Rr9tHuzRt/heRgeq8o1tKWlMMtL5iKdVLEXBHOh1.tW"
+    }
+  ],
+  "mensagens": [
+    {
+      "id": 1777177018314,
+      "autor": "teste",
+      "texto": "teste",
+      "data_hora": "2026-04-26T04:16:58.314Z"
+    },
+    {
+      "id": 1777177020911,
+      "autor": "teste",
+      "texto": "testw",
+      "data_hora": "2026-04-26T04:17:00.911Z"
+    },
+    {
+      "id": 1777177030218,
+      "autor": "ir",
+      "texto": "fasd",
+      "data_hora": "2026-04-26T04:17:10.218Z"
+    },
+    {
+      "id": 1777177032110,
+      "autor": "ir",
+      "texto": "dasde",
+      "data_hora": "2026-04-26T04:17:12.110Z"
+    },
+    {
+      "id": 1777177039139,
+      "autor": "ir",
+      "texto": "oie",
+      "data_hora": "2026-04-26T04:17:19.139Z"
+    }
+  ]
+}
