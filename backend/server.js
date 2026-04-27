@@ -3,6 +3,8 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
+const os = require('os');
+const qrcode = require('qrcode-terminal');
 
 // Importando nossos módulos MVC
 const rotas = require('./src/routes/rotas');
@@ -25,10 +27,31 @@ app.use((req, res, next) => {
 // Usando as rotas separadas
 app.use('/', rotas);
 
+// function pegarIP() {
+//     const interfaces = os.networkInterfaces();
+//     for (const nome in interfaces) {
+//         for (const iface of interfaces[nome]) {
+//             if (iface.family === 'IPv4' && !iface.internal) {
+//                 return iface.address;
+//             }
+//         }
+//     }
+//     return '127.0.0.1';
+// }
+
+const meuIP = '192.168.1.6';
+
 // Iniciando o gerenciador de Sockets
 socketHandler(io);
 
-// Ligando o motor
+// LIGANDO O MOTOR (DEIXE APENAS ESTE BLOCO AQUI NO FINAL)
 server.listen(3000, () => {
-    console.log('Servidor MVC rodando em http://localhost:3000');
+    console.log('--------------------------------------------------');
+    console.log(`🚀 API rodando no seu PC em: http://localhost:3000`);
+    console.log(`🌐 API na sua Rede Wi-Fi:    http://${meuIP}:3000`);
+    console.log('--------------------------------------------------\n');
+    
+    console.log('📱 Escaneie o QR Code abaixo para abrir o app no celular:');
+    
+    qrcode.generate(`http://${meuIP}:5500`, { small: true });
 });
