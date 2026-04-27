@@ -39,10 +39,6 @@ O projeto adota uma separação clara de responsabilidades:
 * [Node.js](https://nodejs.org/) instalado.
 * Um servidor MySQL (como [XAMPP](https://www.apachefriends.org/pt_br/index.html) ou MySQL nativo).
 
-### 1. Clonar e Instalar Dependências
-No terminal, clone o repositório e instale os pacotes necessários:
-```bash
-
 -----
 
 # Aplica-o_PWA
