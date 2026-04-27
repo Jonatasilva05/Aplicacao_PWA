@@ -1,37 +1,48 @@
-// src/controllers/authController.js
 const bcrypt = require('bcryptjs');
-const { lerBanco, salvarBanco } = require('../models/bancoModel');
+const db = require('../config/db');
 
 module.exports = {
-    cadastrar: (req, res) => {
+    cadastrar: async (req, res) => {
         const { nome_falso, senha } = req.body;
-        const banco = lerBanco();
 
-        if (banco.usuarios.find(u => u.nome_falso === nome_falso)) {
-            return res.status(400).json({ erro: "Este nome já está em uso." });
+        try {
+            // Verifica se o usuário já existe
+            const [usuariosExistentes] = await db.query('SELECT * FROM usuarios WHERE nome_falso = ?', [nome_falso]);
+            if (usuariosExistentes.length > 0) {
+                return res.status(400).json({ erro: "Este nome já está em uso." });
+            }
+
+            // Salva no banco
+            const hash = bcrypt.hashSync(senha, 8);
+            const [resultado] = await db.query('INSERT INTO usuarios (nome_falso, senha) VALUES (?, ?)', [nome_falso, hash]);
+
+            res.json({ mensagem: "Usuário cadastrado com sucesso!", id: resultado.insertId });
+        } catch (erro) {
+            console.error(erro);
+            res.status(500).json({ erro: "Erro interno no servidor." });
         }
-
-        const novoUsuario = { 
-            id: Date.now(), 
-            nome_falso, 
-            senha: bcrypt.hashSync(senha, 8) 
-        };
-
-        banco.usuarios.push(novoUsuario);
-        salvarBanco(banco);
-
-        res.json({ mensagem: "Usuário cadastrado com sucesso!", id: novoUsuario.id });
     },
 
-    logar: (req, res) => {
+    logar: async (req, res) => {
         const { nome_falso, senha } = req.body;
-        const banco = lerBanco();
-        const usuario = banco.usuarios.find(u => u.nome_falso === nome_falso);
 
-        if (!usuario || !bcrypt.compareSync(senha, usuario.senha)) {
-            return res.status(401).json({ erro: "Usuário ou senha incorretos." });
+        try {
+            const [usuarios] = await db.query('SELECT * FROM usuarios WHERE nome_falso = ?', [nome_falso]);
+            
+            if (usuarios.length === 0) {
+                return res.status(400).json({ erro: "Usuário não encontrado." });
+            }
+
+            const usuario = usuarios[0];
+            const senhaValida = bcrypt.compareSync(senha, usuario.senha);
+            
+            if (!senhaValida) {
+                return res.status(401).json({ erro: "Senha incorreta." });
+            }
+
+            res.json({ mensagem: "Login efetuado com sucesso!", nome_falso: usuario.nome_falso });
+        } catch (erro) {
+            res.status(500).json({ erro: "Erro interno no servidor." });
         }
-
-        res.json({ mensagem: "Login efetuado com sucesso!", nome_falso: usuario.nome_falso });
     }
 };
