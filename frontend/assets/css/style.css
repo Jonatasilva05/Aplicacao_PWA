@@ -21,3 +21,10 @@ body { background-color: #e5ddd5; display: flex; flex-direction: column; align-i
 .chat-input-area input { flex: 1; padding: 12px; border: none; border-radius: 20px; outline: none; margin-right: 10px; }
 .chat-input-area button { padding: 10px 20px; background-color: #008f68; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
 #status-offline { background: #ffcc00; color: #333; text-align: center; padding: 5px; font-size: 12px; display: none; }
+
+/* Adicione no final do seu style.css */
+.mensagem { position: relative; padding-bottom: 20px; /* Espaço para a hora */ }
+.info-mensagem { display: flex; justify-content: flex-end; align-items: center; gap: 5px; font-size: 10px; color: #888; position: absolute; bottom: 5px; right: 10px; }
+.check { font-weight: bold; }
+.check.entregue { color: #888; }
+.check.lido { color: #34b7f1; /* Azulzinho estilo WhatsApp */ }

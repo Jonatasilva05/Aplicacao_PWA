@@ -1,5 +1,5 @@
 // assets/js/api.js
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://192.168.1.6:3000';
 
 async function apiCadastrar(nome_falso, senha) {
     const req = await fetch(`${API_URL}/cadastro`, {
